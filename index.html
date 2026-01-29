@@ -133,13 +133,7 @@
     <div class="topbar-inner">
         <div class="topbar-content">
             <div class="header-left">
-                <!--
-                  Robust logo loading:
-                  - Primary path: assets/logo.jpeg (correct for root index.html)
-                  - Fallbacks try repo-root absolute (/Banking-With-Billy/assets/...), and common extensions/case variants
-                  If you host the site at username.github.io/Banking-With-Billy, some environments request the repo-root path. This small script below will try multiple variants if the first fails.
-                -->
-                <img id="site-logo" src="assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
+                <img src="assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
                 <span class="site-name">Banking With Billy</span>
             </div>
             <div class="search-bar">
@@ -148,74 +142,23 @@
         </div>
         <div class="market-bar">
             <div class="market-item">
-                <span class="market-label">S&P 500</span><span class="market-up">+0.8%</span>
+                <span class="market-label">{{MB_LABEL_1}}</span><span class="market-up">{{MB_VALUE_1}}</span>
             </div>
             <div class="market-item">
-                <span class="market-label">Dow</span><span class="market-up">+0.5%</span>
+                <span class="market-label">{{MB_LABEL_2}}</span><span class="market-up">{{MB_VALUE_2}}</span>
             </div>
             <div class="market-item">
-                <span class="market-label">Nasdaq</span><span class="market-down">-0.3%</span>
+                <span class="market-label">{{MB_LABEL_3}}</span><span class="market-down">{{MB_VALUE_3}}</span>
             </div>
             <div class="market-item">
-                <span class="market-label">Bitcoin</span><span class="market-down">-1.2%</span>
+                <span class="market-label">{{MB_LABEL_4}}</span><span class="market-down">{{MB_VALUE_4}}</span>
             </div>
             <div class="market-item">
-                <span class="market-label">Gold</span><span class="market-up">+0.4%</span>
+                <span class="market-label">{{MB_LABEL_5}}</span><span class="market-up">{{MB_VALUE_5}}</span>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    (function(){
-        var el = document.getElementById("nav-" + window.activePage);
-        if (el && !el.classList.contains("active")) el.classList.add("active");
-    })();
-</script>
-
-<!-- Logo fallback loader -->
-<script>
-(function(){
-    var img = document.getElementById('site-logo');
-    if (!img) return;
-
-    // Candidate paths to try (order matters). Add any other filename variants you expect.
-    var repoName = 'Banking-With-Billy';
-    var candidates = [
-        'assets/logo.jpeg',
-        'assets/logo.jpg',
-        'assets/logo.png',
-        'assets/Logo.jpeg',
-        'assets/Logo.jpg',
-        'assets/logo.JPG',
-        'assets/logo.JPEG',
-        '/' + repoName + '/assets/logo.jpeg',
-        '/' + repoName + '/assets/logo.jpg',
-        '/' + repoName + '/assets/logo.png'
-    ];
-
-    // If the initial src loads, we leave it. Otherwise try the list.
-    function tryLoadList(i) {
-        if (i >= candidates.length) return;
-        var test = new Image();
-        test.onload = function() {
-            img.src = candidates[i];
-        };
-        test.onerror = function() {
-            tryLoadList(i + 1);
-        };
-        test.src = candidates[i];
-    }
-
-    // Only run fallback if initial src fails to load within a short timeout.
-    var fallbackTimeout = setTimeout(function(){ tryLoadList(0); }, 300); // tries after 300ms
-    // If the initial image loads quickly, cancel fallback
-    var checker = new Image();
-    checker.onload = function() { clearTimeout(fallbackTimeout); };
-    checker.onerror = function() { /* let fallback run */ };
-    checker.src = img.src;
-})();
-</script>
 
 <!-- NAV -->
 <div class="nav">
@@ -242,10 +185,10 @@
     <div class="ticker-inner">
         <div class="ticker-label">Top Stories</div>
         <div class="ticker-items">
-            <div class="ticker-item">Markets brace for volatility as earnings stack up</div>
-            <div class="ticker-item">Bitcoin whipsaws as leverage builds across majors</div>
-            <div class="ticker-item">Mega-cap tech leads afternoon reversal in U.S. indices</div>
-            <div class="ticker-item">Energy names surge on supply shock headlines</div>
+            <div class="ticker-item">{{TICKER_1}}</div>
+            <div class="ticker-item">{{TICKER_2}}</div>
+            <div class="ticker-item">{{TICKER_3}}</div>
+            <div class="ticker-item">{{TICKER_4}}</div>
         </div>
     </div>
 </div>
@@ -259,20 +202,19 @@
     <!-- HERO + SIDE PANEL -->
     <div class="hero">
         <div class="hero-main">
-            <div class="hero-kicker">Featured Story</div>
-            <div class="hero-title">Why This Week��s Moves Could Reshape the Next Quarter</div>
-            <div class="hero-meta">Markets · Real-time view · Updated throughout the day</div>
+            <div class="hero-kicker">{{HERO_KICKER}}</div>
+            <div class="hero-title">{{HERO_TITLE}}</div>
+            <div class="hero-meta">{{HERO_META}}</div>
             <div class="hero-body">
-                Index futures, crypto majors, and key sectors are all flashing signals at once. This is where
-                positioning, timing, and conviction separate noise from opportunity.
+                {{HERO_BODY}}
             </div>
-            <a href="NEWS.html" class="hero-link">Go to today’s full market rundown →</a>
+            <a href="{{HERO_LINK}}" class="hero-link">Go to today’s full market rundown →</a>
         </div>
         <div class="hero-side">
             <div class="hero-side-title">Quick Signals</div>
-            <div class="hero-side-item">• Crypto majors are trading in tight ranges ahead of macro data.</div>
-            <div class="hero-side-item">• Sports, media, and betting names are reacting to schedule shifts.</div>
-            <div class="hero-side-item">• Short-term rates expectations are drifting after new commentary.</div>
+            <div class="hero-side-item">• {{QUICK_SIGNAL_1}}</div>
+            <div class="hero-side-item">• {{QUICK_SIGNAL_2}}</div>
+            <div class="hero-side-item">• {{QUICK_SIGNAL_3}}</div>
         </div>
     </div>
 
@@ -283,10 +225,10 @@
             <a href="NEWS.html" class="section-link">View all news →</a>
         </div>
         <ul class="trending-list">
-            <li class="trending-item">• Inside today’s biggest intraday reversal across tech and financials.</li>
-            <li class="trending-item">• How crypto funding rates are setting up the next move.</li>
-            <li class="trending-item">• The three sectors quietly leading this week’s rotation.</li>
-            <li class="trending-item">• What options flow is saying about the next 48 hours.</li>
+            <li class="trending-item">• {{TRENDING_1}}</li>
+            <li class="trending-item">• {{TRENDING_2}}</li>
+            <li class="trending-item">• {{TRENDING_3}}</li>
+            <li class="trending-item">• {{TRENDING_4}}</li>
         </ul>
     </div>
 
@@ -299,17 +241,17 @@
         <div class="video-row">
             <div class="video-card">
                 <div class="video-thumb"></div>
-                <div class="video-title">Market Close Recap: Winners, Losers, and Setups</div>
+                <div class="video-title">{{VIDEO_TITLE_1}}</div>
                 <div class="video-meta">Today · 8 min watch</div>
             </div>
             <div class="video-card">
                 <div class="video-thumb"></div>
-                <div class="video-title">Crypto Check-In: Levels That Actually Matter</div>
+                <div class="video-title">{{VIDEO_TITLE_2}}</div>
                 <div class="video-meta">Today · 6 min watch</div>
             </div>
             <div class="video-card">
                 <div class="video-thumb"></div>
-                <div class="video-title">Sports & Markets: When Games Move Money</div>
+                <div class="video-title">{{VIDEO_TITLE_3}}</div>
                 <div class="video-meta">This week · 10 min watch</div>
             </div>
         </div>
@@ -323,20 +265,20 @@
         </div>
         <div class="industry-grid">
             <div class="industry-card">
-                <div class="industry-label">Technology</div>
-                <div>Big-cap earnings and AI names are driving today’s narrative.</div>
+                <div class="industry-label">{{IND_LABEL_1}}</div>
+                <div>{{IND_BODY_1}}</div>
             </div>
             <div class="industry-card">
-                <div class="industry-label">Energy</div>
-                <div>Supply headlines and futures curves are reshaping sentiment.</div>
+                <div class="industry-label">{{IND_LABEL_2}}</div>
+                <div>{{IND_BODY_2}}</div>
             </div>
             <div class="industry-card">
-                <div class="industry-label">Crypto</div>
-                <div>Funding, open interest, and on-chain flows are in focus.</div>
+                <div class="industry-label">{{IND_LABEL_3}}</div>
+                <div>{{IND_BODY_3}}</div>
             </div>
             <div class="industry-card">
-                <div class="industry-label">Sports & Media</div>
-                <div>Rights deals, schedules, and betting lines are moving names.</div>
+                <div class="industry-label">{{IND_LABEL_4}}</div>
+                <div>{{IND_BODY_4}}</div>
             </div>
         </div>
     </div>
