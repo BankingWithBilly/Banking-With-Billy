@@ -133,7 +133,13 @@
     <div class="topbar-inner">
         <div class="topbar-content">
             <div class="header-left">
-                <img src="assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
+                <!--
+                  Robust logo loading:
+                  - Primary path: assets/logo.jpeg (correct for root index.html)
+                  - Fallbacks try repo-root absolute (/Banking-With-Billy/assets/...), and common extensions/case variants
+                  If you host the site at username.github.io/Banking-With-Billy, some environments request the repo-root path. This small script below will try multiple variants if the first fails.
+                -->
+                <img id="site-logo" src="assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
                 <span class="site-name">Banking With Billy</span>
             </div>
             <div class="search-bar">
@@ -159,6 +165,57 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function(){
+        var el = document.getElementById("nav-" + window.activePage);
+        if (el && !el.classList.contains("active")) el.classList.add("active");
+    })();
+</script>
+
+<!-- Logo fallback loader -->
+<script>
+(function(){
+    var img = document.getElementById('site-logo');
+    if (!img) return;
+
+    // Candidate paths to try (order matters). Add any other filename variants you expect.
+    var repoName = 'Banking-With-Billy';
+    var candidates = [
+        'assets/logo.jpeg',
+        'assets/logo.jpg',
+        'assets/logo.png',
+        'assets/Logo.jpeg',
+        'assets/Logo.jpg',
+        'assets/logo.JPG',
+        'assets/logo.JPEG',
+        '/' + repoName + '/assets/logo.jpeg',
+        '/' + repoName + '/assets/logo.jpg',
+        '/' + repoName + '/assets/logo.png'
+    ];
+
+    // If the initial src loads, we leave it. Otherwise try the list.
+    function tryLoadList(i) {
+        if (i >= candidates.length) return;
+        var test = new Image();
+        test.onload = function() {
+            img.src = candidates[i];
+        };
+        test.onerror = function() {
+            tryLoadList(i + 1);
+        };
+        test.src = candidates[i];
+    }
+
+    // Only run fallback if initial src fails to load within a short timeout.
+    var fallbackTimeout = setTimeout(function(){ tryLoadList(0); }, 300); // tries after 300ms
+    // If the initial image loads quickly, cancel fallback
+    var checker = new Image();
+    checker.onload = function() { clearTimeout(fallbackTimeout); };
+    checker.onerror = function() { /* let fallback run */ };
+    checker.src = img.src;
+})();
+</script>
 
 <!-- NAV -->
 <div class="nav">
@@ -203,7 +260,7 @@
     <div class="hero">
         <div class="hero-main">
             <div class="hero-kicker">Featured Story</div>
-            <div class="hero-title">Why This Week’s Moves Could Reshape the Next Quarter</div>
+            <div class="hero-title">Why This Week��s Moves Could Reshape the Next Quarter</div>
             <div class="hero-meta">Markets · Real-time view · Updated throughout the day</div>
             <div class="hero-body">
                 Index futures, crypto majors, and key sectors are all flashing signals at once. This is where
