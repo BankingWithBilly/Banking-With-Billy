@@ -9,7 +9,7 @@
         body { background: #fafaf9; margin: 0; font-family: 'Inter', system-ui, sans-serif; color: #222; }
 
         .topbar { background: linear-gradient(90deg, #002868 0%, #BF0A30 100%); color: #fff; padding: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .topbar-content { display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; padding: 0 32px; height: 72px; }
+        .topbar-content { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 72px; }
         .header-left { display: flex; align-items: center; }
         .logo { height: 48px; width: 48px; border-radius: 12px; object-fit: cover; border: 2px solid #fff; background: #fff; margin-right: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .site-name { font-size: 2.1rem; font-weight: 900; color: #fff; letter-spacing: 1px; margin-left: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -17,8 +17,8 @@
         .search-input { padding: 8px 16px; border-radius: 8px; border: none; font-size: 1rem; width: 220px; background: #fff; color: #222; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 
         .nav { background: #fff; border-bottom: 2px solid #BF0A30; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .nav-content { display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 54px; }
-        .nav-link { color: #002868; font-weight: 700; font-size: 1.1rem; text-decoration: none; margin-right: 28px; padding: 8px 0; border-bottom: 2px solid transparent; transition: 0.2s; }
+        .nav-content { display: flex; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 54px; overflow-x: auto; }
+        .nav-link { color: #002868; font-weight: 700; font-size: 1.1rem; text-decoration: none; margin-right: 28px; padding: 8px 0; border-bottom: 2px solid transparent; transition: 0.2s; white-space: nowrap; }
         .nav-link.active { color: #BF0A30; border-bottom: 2px solid #BF0A30; }
 
         .main-content { max-width: 700px; margin: 32px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); }
@@ -29,11 +29,23 @@
 <body>
 
 <script>
-    // ACTIVE PAGE IDENTIFIER FOR MODULE SYSTEM
     window.activePage = "home";
 </script>
 
-<!-- NAVIGATION MODULE -->
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="topbar-content">
+        <div class="header-left">
+            <img src="../assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
+            <span class="site-name">Banking With Billy</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search..." />
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION BAR -->
 <div class="nav">
     <div class="nav-content">
         <a href="index.html" class="nav-link" id="nav-home">Homepage</a>
@@ -47,23 +59,10 @@
 </div>
 
 <script>
-    // AUTO-HIGHLIGHT ACTIVE PAGE
     document.getElementById("nav-" + window.activePage).classList.add("active");
 </script>
 
-<!-- PAGE CONTENT -->
-<div class="topbar">
-    <div class="topbar-content">
-        <div class="header-left">
-            <img src="../assets/logo.jpeg" alt="Banking With Billy Logo" class="logo" />
-            <span class="site-name">Banking With Billy</span>
-        </div>
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Search..." />
-        </div>
-    </div>
-</div>
-
+<!-- MAIN CONTENT -->
 <div class="main-content">
     <h1>Welcome to Banking With Billy</h1>
     <div class="meta">The world's most real-time, professional news for all 156 industries and global events.</div>
