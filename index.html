@@ -21,14 +21,30 @@
         .nav-link { color: #002868; font-weight: 700; font-size: 1.1rem; text-decoration: none; margin-right: 28px; padding: 8px 0; border-bottom: 2px solid transparent; transition: 0.2s; white-space: nowrap; }
         .nav-link.active { color: #BF0A30; border-bottom: 2px solid #BF0A30; }
 
-        .main-content { max-width: 700px; margin: 32px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); }
-        h1 { font-size: 2.4rem; font-weight: 900; color: #222; margin-bottom: 0.5em; line-height: 1.1; }
-        .meta { color: #888; font-size: 1rem; margin-bottom: 2em; font-style: italic; letter-spacing: 0.5px; }
+        .main-content { max-width: 1100px; margin: 32px auto; padding: 24px; background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); }
+        h1 { font-size: 2.4rem; font-weight: 900; color: #222; margin-bottom: 0.25em; line-height: 1.1; }
+        .meta { color: #888; font-size: 1rem; margin-bottom: 1.5em; font-style: italic; letter-spacing: 0.5px; }
+
+        /* Pages grid */
+        .pages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 12px; }
+        .page-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; border-radius: 12px; background: linear-gradient(180deg,#ffffff,#f8f8f9); box-shadow: 0 6px 18px rgba(0,0,0,0.05); text-decoration: none; color: inherit; border: 1px solid rgba(0,0,0,0.03); transition: transform .12s ease, box-shadow .12s ease; }
+        .page-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .page-title { font-weight: 800; color: #002868; font-size: 1.05rem; }
+        .page-desc { color: #666; font-size: 0.95rem; margin-top: 4px; }
+
+        /* small screens */
+        @media (max-width: 560px) {
+            .site-name { font-size: 1.6rem; }
+            .nav-content { padding: 0 18px; }
+            .topbar-content { padding: 0 18px; }
+            .main-content { margin: 18px; padding: 18px; }
+        }
     </style>
 </head>
 <body>
 
 <script>
+    // default active page for this file
     window.activePage = "home";
 </script>
 
@@ -59,13 +75,55 @@
 </div>
 
 <script>
-    document.getElementById("nav-" + window.activePage).classList.add("active");
+    // Safely add active class if element exists
+    (function(){
+        var el = document.getElementById("nav-" + window.activePage);
+        if (el && !el.classList.contains("active")) el.classList.add("active");
+    })();
 </script>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
     <h1>Welcome to Banking With Billy</h1>
     <div class="meta">The world's most real-time, professional news for all 156 industries and global events.</div>
+
+    <!-- Pages grid so you can "see" all pages from the homepage -->
+    <div class="pages-grid" aria-label="Main site sections">
+        <a class="page-card" href="index.html" title="Homepage">
+            <div class="page-title">Homepage</div>
+            <div class="page-desc">Start here — the latest highlights, featured stories, and quick links.</div>
+        </a>
+
+        <a class="page-card" href="NEWS.html" title="News">
+            <div class="page-title">News</div>
+            <div class="page-desc">Breaking stories and in-depth reporting across markets and industries.</div>
+        </a>
+
+        <a class="page-card" href="VIDEOS.html" title="Videos">
+            <div class="page-title">Videos</div>
+            <div class="page-desc">Short-form and long-form video coverage, interviews, and explainers.</div>
+        </a>
+
+        <a class="page-card" href="CRYPTO.html" title="Crypto">
+            <div class="page-title">Crypto</div>
+            <div class="page-desc">Real-time crypto market moves, analysis, and trading insights.</div>
+        </a>
+
+        <a class="page-card" href="SPORTS.html" title="Sports">
+            <div class="page-title">Sports</div>
+            <div class="page-desc">Sports coverage with a market and culture-focused lens.</div>
+        </a>
+
+        <a class="page-card" href="PUBLICTRADES.html" title="Billy's Public Trades">
+            <div class="page-title">Billy's Public Trades</div>
+            <div class="page-desc">View Billy's public trades and positions (placeholder page).</div>
+        </a>
+
+        <a class="page-card" href="TRADINGCARDS.html" title="Billy's Trading Cards">
+            <div class="page-title">Billy's Trading Cards</div>
+            <div class="page-desc">Collectible cards and highlights — a fun way to track trades and moments.</div>
+        </a>
+    </div>
 </div>
 
 </body>
